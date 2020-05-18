@@ -19,7 +19,7 @@ This Docker image is not meant to be ran directly, as it does not contain any ex
 Line example of use in a Dockerfile:
 
 ```Dockerfile
-COPY	--from=macgyverbass/ipxe:latest /ipxe/ /ipxe/
+COPY --from=macgyverbass/ipxe:latest /ipxe/ /ipxe/
 ```
 
 In the basic example above, all of the iPXE files from this image are copied into the image being built.
@@ -27,7 +27,7 @@ In the basic example above, all of the iPXE files from this image are copied int
 Note that it may be better to only copy the required files into a Docker image from this image.  The Dockerfile `COPY` instruction supports multiple selective files to be copied to a single destination using a single `COPY` instruction.  Here is a line example of this:
 
 ```Dockerfile
-COPY	--from=macgyverbass/ipxe:latest /ipxe/bin/undionly.kpxe /ipxe/bin-i386-efi/ipxe.efi /ipxe/
+COPY --from=macgyverbass/ipxe:latest /ipxe/bin/undionly.kpxe /ipxe/bin-i386-efi/ipxe.efi /ipxe/
 ```
 
 In this above example, only `undionly.kpxe` and `ipxe.efi` are copied into the destination `/ipxe/` folder, thus resulting in a smaller final image.  Note that care should be taken when copying multiple files using this method however, as there may be duplicate-named files needed to be copied and there may be unintended results.
@@ -52,7 +52,7 @@ To make the final build as small as possible, it then builds the image from scra
 
 The end result is a Docker image with only the compiled iPXE files.  Note that this means this image cannot be ran like other images, but is instead designed to be a resource for grabbing compiled iPXE files for another Docker image build.
 
-# Building/Advanced Usage
+## Building/Advanced Usage
 
 By default, this Docker image uses the latest iPXE branch (master) and builds multiple types ("bin", "bin-i386-efi", "bin-x86_64-efi", and "bin-x86_64-pcbios") of the iPXE binary files.  However, you may build this image with different choices by specifying alternate build-arguments.
 
@@ -69,4 +69,3 @@ As noted above, you can specify a different iPXE branch/tag to pull/checkout and
 This may be useful for debugging or if your image requires a specific version of the iPXE files.
 
 More information on using Docker build-arguments can be found here:  [Set build-time variables (--build-arg)](https://docs.docker.com/engine/reference/commandline/build/#set-build-time-variables---build-arg)
-
