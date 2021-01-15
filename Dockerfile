@@ -1,5 +1,5 @@
 # Compile iPXE first (Tested working on Alpine v3.12)
-FROM	alpine:3.12 AS compile-ipxe
+FROM	alpine:3.13 AS compile-ipxe
 
 # Install all necessary packages for compiling the iPXE binary files
 RUN	apk --no-cache add	\
