@@ -1,5 +1,5 @@
-# Compile iPXE first (Tested working on Alpine v3.12)
-FROM	alpine:3.13 AS compile-ipxe
+# Compile iPXE first using Alpine
+FROM	macgyverbass/base-label:alpine AS compile-ipxe
 
 # Install all necessary packages for compiling the iPXE binary files
 RUN	apk --no-cache add	\
@@ -78,7 +78,7 @@ RUN	[ -z "${IPXE_BIN64}" ] || (	\
 
 # Create image from scratch
 # Note that this image will ONLY contain the compiled iPXE files.
-FROM	scratch
+FROM	macgyverbass/base-label:scratch
 
 # Copy the previously compiled iPXE files
 COPY	--from=compile-ipxe /ipxe/ /ipxe/
